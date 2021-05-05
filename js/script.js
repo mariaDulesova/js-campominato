@@ -33,7 +33,10 @@ function isInArray (element, array) {
 // con difficoltà 1 => tra 1 e 80
 // con difficoltà 2 => tra 1 e 50
 
-var userLevel = prompt ("Please choose the game level:\n Level - 0 - Easy\n Level - 1 Intermediate\n Level - 2 Advanced");
+
+do {
+    var userLevel = prompt ("Please choose the game level:\n Level - 0 Easy\n Level - 1 Intermediate\n Level - 2 Advanced");
+} while(userLevel !=0 && userLevel !=1 && userLevel !=2)
 
 console.log(userLevel);
 
@@ -51,6 +54,8 @@ switch(userLevel) {
         console.log(maxAttempts);
         break;
 }
+
+
 
 //COMPUTER
 var computerBombs = [];
@@ -70,8 +75,9 @@ var userNumberArray = [];
 var gameOver = false;
 
 while (userNumberArray.length < maxAttempts && gameOver == false) { // faccio girare il while finche' non scelgo il numero uguale a quello scelto dal computer e finche' non arrivo al massimo di scelte possibili.
+
     do {
-        var userNumber = parseInt(prompt(" Choose a number from 1 to 100?"));
+        var userNumber = parseInt(prompt("Choose a number from 1 to 100?"));
     } while (isNaN(userNumber) || userNumber < 1 || userNumber > 100); // per continuare a far girare while, almeno una delle tre condizioni deve essere TRUE
     
     
@@ -86,3 +92,6 @@ while (userNumberArray.length < maxAttempts && gameOver == false) { // faccio gi
 if(userNumberArray.length == maxAttempts){
     alert("CONGRATULATIONS\n Your score is: " + userNumberArray.length);
 }
+
+
+
