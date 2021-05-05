@@ -26,6 +26,32 @@ function isInArray (element, array) {
     return check = false;
 }
 
+
+//BONUS
+// all'inizio il software richiede anche una difficoltà all'utente che cambia il range di numeri casuali:
+// con difficoltà 0 => tra 1 e 100
+// con difficoltà 1 => tra 1 e 80
+// con difficoltà 2 => tra 1 e 50
+
+var userLevel = prompt ("Please choose the game level:\n Level - 0 - Easy\n Level - 1 Intermediate\n Level - 2 Advanced");
+
+console.log(userLevel);
+
+switch(userLevel) {
+    case "0":
+        var maxAttempts = 100 - 16;
+        console.log(maxAttempts);
+        break;
+    case "1":
+        var maxAttempts = 80 - 16;
+        console.log(maxAttempts);
+        break;
+    case "2":
+        var maxAttempts = 50 - 16;
+        console.log(maxAttempts);
+        break;
+}
+
 //COMPUTER
 var computerBombs = [];
 
@@ -40,4 +66,23 @@ while (computerBombs.length<16) {
 console.log(computerBombs);
 
 //USER
-var userNumber = [];
+var userNumberArray = [];
+var gameOver = false;
+
+while (userNumberArray.length < maxAttempts && gameOver == false) { // faccio girare il while finche' non scelgo il numero uguale a quello scelto dal computer e finche' non arrivo al massimo di scelte possibili.
+    do {
+        var userNumber = parseInt(prompt(" Choose a number from 1 to 100?"));
+    } while (isNaN(userNumber) || userNumber < 1 || userNumber > 100); // per continuare a far girare while, almeno una delle tre condizioni deve essere TRUE
+    
+    
+    if (isInArray(userNumber, computerBombs)) { //verifico che il numero scelto non e' presente in array del computer
+        gameOver = true;
+        alert("GAMEOVER \n Your score is: " + userNumberArray.length)
+    } else if (!isInArray (userNumber, userNumberArray)) { //se il primo if e' FALSE, verifico che il numero scelto non sia un doppione
+        userNumberArray.push(userNumber);
+    }
+}
+
+if(userNumberArray.length == maxAttempts){
+    alert("CONGRATULATIONS\n Your score is: " + userNumberArray.length);
+}
