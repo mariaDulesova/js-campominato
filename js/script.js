@@ -34,25 +34,24 @@ function isInArray (element, array) {
 // con difficoltà 2 => tra 1 e 50
 
 
-do {
-    var userLevel = prompt ("Please choose the game level:\n Level - 0 Easy\n Level - 1 Intermediate\n Level - 2 Advanced");
-} while(userLevel !=0 && userLevel !=1 && userLevel !=2)
+// do {
+//     var userLevel = prompt ("Please choose the game level:\n Level - 0 Easy\n Level - 1 Intermediate\n Level - 2 Advanced");
+// } while(userLevel !=0 && userLevel !=1 && userLevel !=2)
 
+var userLevel = prompt ("Please choose the game level:\n Level - 0 Easy\n Level - 1 Intermediate\n Level - 2 Advanced");
 console.log(userLevel);
 
 switch(userLevel) {
-    case "0":
-        var maxAttempts = 100 - 16;
-        console.log(maxAttempts);
-        break;
+    
     case "1":
-        var maxAttempts = 80 - 16;
-        console.log(maxAttempts);
+        var maxNumber = 80;
         break;
     case "2":
-        var maxAttempts = 50 - 16;
-        console.log(maxAttempts);
+        var maxNumber = 50;
         break;
+    default:
+        var maxNumber = 100; //usando default, non sono costretto utilizzare i parametri do-while
+
 }
 
 
@@ -61,7 +60,7 @@ switch(userLevel) {
 var computerBombs = [];
 
 while (computerBombs.length<16) {
-    var randomNumber = isRandomNumber(1,100);
+    var randomNumber = isRandomNumber(1,maxNumber);
 
     if(!isInArray(randomNumber,computerBombs)){
         computerBombs.push(randomNumber);
@@ -73,11 +72,13 @@ console.log(computerBombs);
 //USER
 var userNumberArray = [];
 var gameOver = false;
+var maxAttempts = maxNumber-computerBombs.length;
 
 while (userNumberArray.length < maxAttempts && gameOver == false) { // faccio girare il while finche' non scelgo il numero uguale a quello scelto dal computer e finche' non arrivo al massimo di scelte possibili.
 
     do {
-        var userNumber = parseInt(prompt("Choose a number from 1 to 100?"));
+        var userNumber = parseInt(prompt("Choose a number from 1 to " + maxNumber));
+       
     } while (isNaN(userNumber) || userNumber < 1 || userNumber > 100); // per continuare a far girare while, almeno una delle tre condizioni deve essere TRUE
     
     
